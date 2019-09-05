@@ -11,10 +11,9 @@ cache:
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 deploy:
-  if: type = push
   provider: script
-  before_script: cp .travis.settings.xml $HOME/.m2/settings.xml
-  script: mvn deploy -DskipTests
+  if: type = push
+  script: cp .travis.settings.xml $HOME/.m2/settings.xml &&  mvn deploy -DskipTests
   skip_cleanup: true
   on:
     branch: publishMySnapshot
