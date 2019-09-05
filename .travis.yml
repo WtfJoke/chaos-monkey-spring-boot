@@ -1,19 +1,18 @@
 language: java
 jdk:
-  - openjdk8
-  - openjdk9
-  - openjdk10
-  - openjdk11
-  - openjdk12
+- openjdk8
+- openjdk9
+- openjdk10
+- openjdk11
+- openjdk12
 cache:
   directories:
-    - $HOME/.m2
+  - "$HOME/.m2"
 after_success:
 - bash <(curl -s https://codecov.io/bash)
-
 stages:
-  - name: deploy
-    if: type = push
+- name: deploy
+  if: type = push
 deploy:
   provider: script
   before_script: cp .travis.settings.xml $HOME/.m2/settings.xml
@@ -26,4 +25,4 @@ deploy:
 env:
   global:
   - secure: Ugo4+lFNW8MotjyPJIT8aNmBYkjFCyYMDOLftWvnjTqblNQd8EczPzuh8pKnjqi2EeYxY4WMZnwZ7DjzCTfi2QIPen/5W9xiv1Yxb/10sUTNmnpQmWbid4k43KX+FJtJ07Z3AwUTFY8gQiYxmtUYRfpcCjX1slJuzwZA6iw2qVYoVhELJGSQqGWLGGj8OpYd5hYs9fo45peTYKDJJRpLTiqgbiq6Cvr0d4p1ijEiWIOq9+NOMLPptNdJeBSTgxINcLXF17ADLYEoxDV2QdhJ9Ax2lNR3qQ8Gn6FY9dd41O5HE3x7wl8/L+WszLnmWOpu1/i1A/mo8Z483UzoBvoxqKDkrFXDAex2D8D96PI3n0f7vgocfr5LWOx3MRm1vefHG8G0Es2BJsBslcbhDc0oSufOzO546xFlH7FdRZ5FMKMhUbU6QR0abMWMjaAjQsmdNX2LYt7LWly3bp9GGuAlBFh+MHheEubQ1PDfPfw7P4I8C8+qM8SHey/u6P7CGjlOWCwZ5MofvyPxpxS90BsXXrU7ng6E79DmgbFcuoWG/4whDkG1D0l/D2rlqJDvAzni0uNioeIsTsDYN9uCJ35tt77xDRkeDu+f7mHFYIuno61uu7Qd3M4GGoOE1erYwEbet4HQ/AW89XtPRA2jMUgk0AIOeixd5Aah0TTgZ7vNqm4=
-  - secure: rczJ/Xxo9uK7spo8tlCbKcVevZyynv7K0O6v/VNsmb4pXCkdM6/TlhRdGfIDqU0hHGSNklWShSHvWVnwevp2bmMQdCU2ULsJ+dWwiCRwSBJByQFFNiXQxv7uLr/2502m7x5KzaJCgXdDWY7nBRG8liIMSKtmj1IUkZliddi3h3lpfcRm0UplfDku4uLX98SGMGU9s+GUP53BZt6+hOILzEVvXfeyfoQCSYa5+dp5yhVh7pJBjKkGQSQ290mKF/HQbdPmvpY8lANH2AK84XSM5FbpV0tYDb37zIrdIu3uT3HI1agFiR65zdCdf7AjYZvNjAIpaH4478gmIiWD22ym0GiUBt1OgrUlNfYupGT/JVR25Kg1M0YNEtjbeEn4Yaq9fQARwymDakMsZPfsJvDSo7P1LJg9pSlPGPg3Mb8fNdmRv5KaUbvtTfkmcEWlT5ULwCeQrF9TLoBvqL7KJFAIJbrK0XvsFNGsD9GMUqyXOLdzR6CPVEOhV+8NJ4U7aWtQkmOe1SJkD5po3nu/BA04KVBFAWJyMq8gxU+pwpyq1q4e8vjBBeI/D4+evdhzNZB+iI822unCVF1Pw5IlvWQQlz7EI6HErNNrSBKCeJLom6z6XkDT9IDcQQR/FU1k2MKlvS2D+WrCWl60ZtnHXAz9sqRAu6cECre+gEK+TByQVrI=
+  - secure: oo3M1oTKXyBXw4SwiajgepQvFRXjCxbOzt0BKwG8285/yybeavAFn+sXTYX8OU1TC3OqabM7meuYyBWRUjogIEoM2Zeyf02zBXRvWXzityaCJtHTuJsbZvXeB43IfvQxu8G+m35uJRjHfqD1g7la9V+QykPDt5lAf3dDwz53ah+mGHA8jdg87cHbY2Pu+U/sujjv9J9SdlaDG9q9G19N6+O5eroO12dh9xoHq7QHyikKClL7f6CdhW2lQfnFJ/e0RCD5Ub59Nf+TmPdHyCqObLlV6Fow2/cUyWP3fwZQ3/emYntcyWm58zbeM+IeOLbbcy0xTV+U2G33R8ciYYp6gEk+vI0PvHqafcwMNAvj4W2HvvUYt3x919LqIdbGktnAFzD6YqXk1lW0ZY2+zT5pRqNC+toxptjd065/FbtPQpYvPNkJT3nx5VJyrVlwn7IojVuht9G2lMY2IlERojmcGgJXQPPLFCFEiRCRK7GuLi98frAPTm7frxeyAqagzMpTucqTX9Mt7jFdKvC6FJeJ8rhGG3WHvYaN457KvY4bxrYQD9zLC3CirWDRdmPC5QLXHX/SG4gCk1D2sVDAVZwEY7eLDzPhJzZK9fxrS0ehh4xOCz944kd427vaQEaL9r/HmPgaJdPQ2LxagucP4cgvXqXpa2oYrVRqa0a0AGrLTRI=
