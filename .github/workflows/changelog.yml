@@ -1,0 +1,28 @@
+name: Convert Changelog to Markdown
+
+on:
+  push:
+    tags:
+      - b*
+    branches:
+      - pandoc
+
+jobs:
+  convert_via_pandoc:
+    runs-on: ubuntu-latest
+    env:
+      CHANGELOG_PATH: "chaos-monkey-docs/src/main/asciidoc/"
+      TAG_NAME: ${{ github.event.ref }}
+    steps:
+      - uses: actions/checkout@v2
+      - run: sed -i 's/{project-version}/$TAG_NAME/g' $CHANGELOG_PATH/changes.adoc
+      - uses: docker://asciidoctor/docker-asciidoctor:1.3.3
+        with:
+          args: "asciidoctor -b docbook $CHANGELOG_PATH/changes.adoc"
+      - uses: docker://pandoc/core:2.13
+        with:
+          args: "-f docbook -t gfm -o changes.md $CHANGELOG_PATH/changes.xml --wrap=none"
+      - uses: actions/upload-artifact@v2
+        with:
+          name: changelog
+          path: changes.md
