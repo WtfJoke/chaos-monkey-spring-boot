@@ -1,6 +1,10 @@
 name: Chaos Monkey Build
 
-on: [push, pull_request]
+on:
+  push:
+    branches-ignore:
+      - pandoc
+  pull_request:
 
 jobs:
   build:

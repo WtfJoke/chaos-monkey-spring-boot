@@ -1,0 +1,35 @@
+name: Convert Changelog to Markdown
+
+on:
+  push:
+    tags:
+      - b*
+    branches:
+      - pandoc
+
+jobs:
+  convert_via_pandoc:
+    runs-on: ubuntu-latest
+    env:
+      TAG_NAME: ${{ github.ref }}
+    steps:
+      - name: Set TAG_NAME without ref
+        run: echo "TAG_NAME_WITHOUT_REF=${TAG_NAME//refs\/tags\/}" >> $GITHUB_ENV
+      - uses: actions/checkout@v2
+      - uses: docker://asciidoctor/docker-asciidoctor:1.7
+        with:
+          args: "asciidoctor -b docbook chaos-monkey-docs/src/main/asciidoc/changes.adoc"
+      - uses: docker://pandoc/core:2.14
+        with:
+          args: "-f docbook -t gfm -o changes.md chaos-monkey-docs/src/main/asciidoc/changes.xml --wrap=none"
+      - run: sed -i "s/{project-version}/$TAG_NAME_WITHOUT_REF/g" changes.md
+      - uses: actions/upload-artifact@v2
+        with:
+          name: changelog
+          path: changes.md
+      - name: Create Github Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body_path: changes.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
