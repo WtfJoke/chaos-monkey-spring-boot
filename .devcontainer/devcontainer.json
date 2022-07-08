@@ -11,7 +11,9 @@
 			"default": true,
 			"name": "JavaSE-1.8",
 			"path": "/usr/local/sdkman/candidates/java/current"
-		}]
+		}],
+		"java.format.enabled": true,
+		"java.format.settings.url": "./code-style.xml"
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
